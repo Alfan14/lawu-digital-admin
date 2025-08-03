@@ -9,7 +9,6 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "start": "vite"
-
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.0.0",

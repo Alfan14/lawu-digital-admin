@@ -6,8 +6,11 @@ import AdminList from './pages/AdminList';
 import './index.css';
 import AdminPost from './pages/AdminPost';
 import AdminEdit from './pages/AdminEdit';
+import { library } from '@fortawesome/fontawesome-svg-core';
 
+import { faHome, faUser, faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
+library.add(faHome, faUser, faExclamationTriangle);
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>

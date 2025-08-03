@@ -480,13 +480,6 @@ const AdminEdit = () => {
                                 />
                             </div>
 
-                            <div className="mt-12 flex items-center justify-center text-gray-600 text-xl font-medium">
-                                <svg className="w-7 h-7 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                </svg>
-                                <span>CREATE POST SCHEDULE FOR SOCIAL MEDIA</span>
-                            </div>
-
                             {loading && <p className="text-blue-500 mt-4 text-center">Submitting post...</p>}
                             {error && <p className="text-red-500 mt-4 text-center">{error}</p>}
                             {successMessage && <p className="text-green-500 mt-4 text-center">{successMessage}</p>}
