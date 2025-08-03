@@ -1,0 +1,22 @@
+Ketika route / baik-baik saja -> tambahkan di root folder vercel.json dan isikan berikut :
+{
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/" }
+  ]
+}
+dan di vite.config.ts:
+import { defineConfig } from 'vite'
+import tailwindcss from '@tailwindcss/vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [
+    tailwindcss(),
+    react()
+  ],
+   base: '/',
+    build: {
+    outDir: 'dist'
+  }
+})
+

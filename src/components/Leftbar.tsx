@@ -9,26 +9,30 @@ import {
     LayoutDashboard
 } from 'lucide-react';
 
+import { Link, useLocation } from 'react-router-dom'; 
+
 const sidebarNav = [
-    { name: "Home", icon: Home , link : "/"},
-    { name: "Blogs", icon: FileText , link : "/admin"},
-    { name: "Settings", icon: Settings },
-    { name: "Website", icon: Globe },
-    { name: "Extensions", icon: FileArchive },
-    { name: "Templates", icon: LayoutDashboard },
-    { name: "Statistics", icon: BarChart2 },
-    { name: "Admin Users", icon: User },
+    { name: "Home", icon: Home, link: "/" },
+    { name: "Blogs", icon: FileText, link: "/admin/blogs" }, 
+    { name: "Settings", icon: Settings, link: "/settings" },
+    { name: "Website", icon: Globe, link: "/website" }, 
+    { name: "Extensions", icon: FileArchive, link: "/extensions" }, 
+    { name: "Templates", icon: LayoutDashboard, link: "/templates" }, 
+    { name: "Statistics", icon: BarChart2, link: "/statistics" }, 
+    { name: "Admin Users", icon: User, link: "/admin-users" }, 
 ];
 
-import LawuDigital from "../assets/Lawu_Digital__2.ico"
+import LawuDigital from "../assets/Lawu_Digital__2.ico";
 
 const Leftbar = () => {
+    const location = useLocation(); // Get the current location object
+
     return (
         <aside className="w-64 bg-gray-900 text-gray-200 p-4 flex flex-col justify-between">
             <div>
                 <div className="flex items-center space-x-3 mb-8">
                     <div className="p-2 bg-gray-700 rounded-md">
-                        <img src={LawuDigital} alt="logo" className="rounded-full"/>
+                        <img src={LawuDigital} alt="logo" className="rounded-full" />
                     </div>
                     <div className="text-sm font-semibold tracking-wide">Admin</div>
                 </div>
@@ -36,17 +40,24 @@ const Leftbar = () => {
                     <ul>
                         {sidebarNav.map((item, index) => (
                             <li key={index} className="mb-2">
-                                <a href={item.link} className={`flex items-center space-x-3 p-3 rounded-lg transition-colors duration-200 ${item.name === "Home" ? "bg-blue-500 text-white" : "hover:bg-gray-800"}`}>
+                                <Link 
+                                    to={item.link} 
+                                    className={`flex items-center space-x-3 p-3 rounded-lg transition-colors duration-200 ${
+                                        location.pathname === item.link // Check if the current path matches the item's link
+                                            ? "bg-blue-500 text-white" 
+                                            : "hover:bg-gray-800"
+                                    }`}
+                                >
                                     <item.icon className="h-5 w-5" />
                                     <span>{item.name}</span>
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </ul>
                 </nav>
             </div>
         </aside>
-    )
-}
+    );
+};
 
-export default Leftbar
+export default Leftbar;

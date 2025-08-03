@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Dasboard />} />
-        <Route path="/admin" element={<AdminList />} />
+        <Route path="/admin/blogs" element={<AdminList />} />
         <Route path="/admin/create-blog" element={<AdminPost />} />
         <Route path="/admin/edit-blog" element={<AdminEdit />} />
       </Routes>
