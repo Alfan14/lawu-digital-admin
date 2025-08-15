@@ -156,7 +156,7 @@ const AdminPost = () => {
       setLoading(false);
       return;
     }
-    
+
     if (!formData.author_image) {
       setError("Please upload an author image.");
       setLoading(false);
@@ -187,7 +187,7 @@ const AdminPost = () => {
     } finally {
       setLoading(false);
     }
-};
+  };
 
   return (
     <div className="flex min-h-screen bg-gray-100 text-gray-900 font-sans">
@@ -218,6 +218,16 @@ const AdminPost = () => {
                     </label>
                     {formData.cover_image && <p className="mt-2 text-green-600 text-sm">Image uploaded successfully!</p>}
                     {imageError && <p className="mt-2 text-red-600 text-sm">{imageError}</p>}
+
+                    {formData.cover_image && (
+                      <div className="mt-4">
+                        <img
+                          src={formData.cover_image}
+                          alt="Cover Preview"
+                          className="size-full object-cover rounded-lg"
+                        />
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex flex-col space-y-8">
