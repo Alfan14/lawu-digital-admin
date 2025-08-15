@@ -2,7 +2,6 @@
 
 import axios from "axios";
 import { useState, useRef, type ChangeEvent, type FormEvent } from "react";
-import { useSearchParams } from 'react-router-dom';
 import Leftbar from "../components/Leftbar";
 import Navbar from "../components/Navbar";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -40,8 +39,6 @@ interface News {
 }
 
 const AdminPost = () => {
-  const [searchParams] = useSearchParams();
-
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -58,11 +55,11 @@ const AdminPost = () => {
     excerpt: "",
     content: "",
     cover_image: "",
-    author_name: "", 
+    author_name: "",
     author_image: "",
     category: "",
     tags: "",
-    published_at: new Date().toISOString().split('T')[0], 
+    published_at: new Date().toISOString().split('T')[0],
   });
 
   const editorRef = useRef<HTMLDivElement>(null);
@@ -97,7 +94,7 @@ const AdminPost = () => {
       const apiCloudinaryUrl = `${baseUrl}api/upload`;
       const response = await axios.post(apiCloudinaryUrl, uploadFormData);
 
-      setFormData((prev) => ({ ...prev, cover_image: response.data.secure_url }));
+      setFormData((prev) => ({ ...prev, cover_image: response.data.url }));
       console.log("Upload successful:", response.data.secure_url);
 
     } catch (err: any) {
@@ -128,8 +125,8 @@ const AdminPost = () => {
       const apiCloudinaryUrl = `${baseUrl}api/upload`;
       const response = await axios.post(apiCloudinaryUrl, uploadFormData);
 
-      setFormData((prev) => ({ ...prev, author_image: response.data.secure_url }));
-      console.log("Upload successful:", response.data.secure_url);
+      setFormData((prev) => ({ ...prev, author_image: response.data.url }));
+      console.log("Upload successful:", response.data.url);
 
     } catch (err: any) {
       console.error("Image upload error:", err);
@@ -154,6 +151,18 @@ const AdminPost = () => {
     setError(null);
     setSuccessMessage(null);
 
+    if (!formData.cover_image) {
+      setError("Please upload a cover image.");
+      setLoading(false);
+      return;
+    }
+    
+    if (!formData.author_image) {
+      setError("Please upload an author image.");
+      setLoading(false);
+      return;
+    }
+
     const editorContent = editorRef.current?.innerHTML || "";
 
     const payload = {
@@ -161,7 +170,7 @@ const AdminPost = () => {
       content: editorContent,
     };
 
-    console.log("Isi Payload:",payload)
+    console.log("Isi Payload:", payload)
 
     try {
       const apiNewsUrl = `${baseUrl}admin/post`;
@@ -178,7 +187,7 @@ const AdminPost = () => {
     } finally {
       setLoading(false);
     }
-  };
+};
 
   return (
     <div className="flex min-h-screen bg-gray-100 text-gray-900 font-sans">
@@ -230,7 +239,7 @@ const AdminPost = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
                       <div>
                         <label htmlFor="author_name" className="block text-base font-medium text-gray-700 mb-3">Author</label>
-                        <input type="text" id="author_name" name="author_name" value={formData.author_name} className="w-full px-5 py-4 border border-gray-300 rounded-lg bg-gray-50 cursor-not-allowed text-base" onChange={handleInputChange}/>
+                        <input type="text" id="author_name" name="author_name" value={formData.author_name} className="w-full px-5 py-4 border border-gray-300 rounded-lg bg-gray-50 text-base" onChange={handleInputChange} />
                       </div>
                       <div>
                         <label htmlFor="published_at" className="block text-base font-medium text-gray-700 mb-3">Publish Date</label>
@@ -297,7 +306,7 @@ const AdminPost = () => {
                         <FontAwesomeIcon icon={faCode} size="lg" />
                       </button>
                       <button type="button" className="p-2 rounded hover:bg-gray-200" title="Quote" onClick={() => formatDoc('formatBlock', 'blockquote')}>
-                        <FontAwesomeIcon icon={faQuoteRight} size="lg" />               
+                        <FontAwesomeIcon icon={faQuoteRight} size="lg" />
                       </button>
                     </div>
                   </div>
