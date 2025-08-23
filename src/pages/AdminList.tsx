@@ -51,7 +51,6 @@ const AdminList = () => {
         setLoading(false);
       }
     };
-
     fetchData();
   }, [baseUrl, searchParams]);
 
