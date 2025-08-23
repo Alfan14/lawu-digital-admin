@@ -1,3 +1,5 @@
+"use client";
+
 import {
   FileText,
   Users,
@@ -14,6 +16,7 @@ import {
   ResponsiveContainer
 } from 'recharts';
 
+import { useState } from "react";
 import Navbar from '../components/Navbar';
 import Leftbar from '../components/Leftbar';
 
@@ -43,12 +46,15 @@ const recentBlogs = [
 ];
 
 const Dasboard = () => {
+   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  
+    const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   return (
-    <div className="flex min-h-screen bg-gray-100 text-gray-900 font-sans">
-      <Leftbar/>
-      <div className="flex-1 flex flex-col">
-        <Navbar/>
-        <main className="p-8">
+    <div className="flex flex-col h-screen bg-gray-100 font-sans">
+      <Navbar toggleSidebar={toggleSidebar} />
+      <div className="flex flex-1 overflow-hidden">
+        <Leftbar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+        <main className="flex-1 p-4 md:p-8 overflow-y-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {dashboardStats.map((stat, index) => (
               <div key={index} className="bg-white rounded-xl shadow-md p-6 flex flex-col justify-between h-40 transform transition-transform duration-300 hover:scale-105">

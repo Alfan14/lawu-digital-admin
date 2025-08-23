@@ -42,9 +42,11 @@ const AdminPost = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
-
+  
   const [imageLoading, setImageLoading] = useState<boolean>(false);
   const [imageError, setImageError] = useState<string | null>(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
   const baseUrl = import.meta.env.VITE_API_URL || "";
 
@@ -190,11 +192,11 @@ const AdminPost = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-100 text-gray-900 font-sans">
-      <Leftbar />
-      <div className="flex-1 flex flex-col">
-        <Navbar />
-        <main className="p-8">
+    <div className="flex flex-col h-screen bg-gray-100 font-sans">
+      <Navbar toggleSidebar={toggleSidebar} />
+      <div className="flex flex-1 overflow-hidden">
+        <Leftbar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+        <main className="flex-1 p-4 md:p-8 overflow-y-auto">
           <div className="min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8">
             <div className="bg-white rounded-xl shadow-lg w-full p-10 sm:p-12">
               <div className="mb-10">

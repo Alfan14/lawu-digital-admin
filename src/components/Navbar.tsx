@@ -1,48 +1,43 @@
-import {
-    ChevronRight,
-    MessageCircle,
-    ChevronDown,
-    User,
-} from 'lucide-react';
+import { Menu, Bell, User, Search } from 'lucide-react';
 
-import LawuDigital from "../assets/Lawu_Digital_5.ico";
-import BackButton from './BackButton';
-import NextButton from './NextButton';
-
-const Navbar = () => {
-    return (
-        <header className="bg-white shadow-sm p-4 flex items-center justify-between z-10">
-            <div className="flex items-center space-x-4">
-                <img src={LawuDigital} alt="Logo" className="rounded-full" />
-                <h1 className="text-xl font-bold text-gray-800">Lawu Digital</h1>
-                <div className="flex items-center space-x-2 ml-10">
-                    <BackButton>
-                    </BackButton>
-                    <NextButton>
-                    </NextButton>
-                </div>
-            </div>
-
-            <nav className="flex-1 hidden md:flex items-center justify-center space-x-6 text-gray-600">
-                <a href="#" className="font-semibold text-blue-500 border-b-2 border-blue-500 pb-1">Dashboard</a>
-                <a href="#" className="hover:text-gray-800 transition-colors duration-200">Messages</a>
-            </nav>
-
-            <div className="flex items-center space-x-4">
-                <div className="flex items-center space-x-2 text-gray-600">
-                    <a href="#" className="flex items-center space-x-1 hover:text-gray-800 transition-colors duration-200">
-                        <MessageCircle className="h-5 w-5" />
-                        <span>Messages</span>
-                    </a>
-                </div>
-                <div className="relative flex items-center space-x-1 p-2 rounded-full hover:bg-gray-100 cursor-pointer">
-                    <User className="h-5 w-5" />
-                    <span className="font-semibold text-sm text-gray-800">administrator</span>
-                    <ChevronDown className="h-4 w-4" />
-                </div>
-            </div>
-        </header>
-    )
+interface NavbarProps {
+  toggleSidebar: () => void;
 }
 
-export default Navbar
+// Navbar component
+const Navbar: React.FC<NavbarProps> = ({ toggleSidebar }) => {
+  return (
+    <nav className="flex items-center justify-between p-4 bg-white shadow-sm border-b border-gray-200">
+      <div className="md:hidden">
+          <button onClick={toggleSidebar} className="text-gray-700 hover:text-gray-900 focus:outline-none cursor-pointer">
+              <Menu size={24} />
+          </button>
+      </div>
+      <div className="relative flex-1 max-w-sm mr-4 hidden md:block">
+        <input
+          type="text"
+          placeholder="Search..."
+          className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition duration-200"
+        />
+        <Search size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+      </div>
+
+      <div className="hidden md:flex items-center flex-1 justify-center">
+        <h1 className="text-xl font-bold text-gray-800">Admin Dashboard</h1>
+      </div>
+
+      <div className="flex items-center space-x-4">
+        <button className="text-gray-600 hover:text-orange-600 transition-colors duration-200 cursor-pointer">
+          <Bell size={24} />
+        </button>
+
+        {/* User Profile Icon/Dropdown */}
+        <button className="text-gray-600 hover:text-orange-600 transition-colors duration-200 cursor-pointer">
+          <User size={24} />
+        </button>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
