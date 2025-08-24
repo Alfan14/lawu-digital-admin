@@ -45,7 +45,7 @@ const recentBlogs = [
   { author: "John Smith", date: "1 month ago" },
 ];
 
-const Dasboard = () => {
+const Dashboard = () => {
    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
@@ -120,4 +120,4 @@ const Dasboard = () => {
   );
 }
 
-export default Dasboard;
+export default Dashboard;

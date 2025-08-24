@@ -11,7 +11,7 @@ const Leftbar: React.FC<LeftbarProps> = ({ isOpen, toggleSidebar }) => {
   const currentPath = window.location.pathname;
 
   const navItems = [
-    { name: 'Dashboard', icon: <LayoutDashboard size={20} />, href: '/' },
+    { name: 'Dashboard', icon: <LayoutDashboard size={20} />, href: '/admin/dashboard' },
     { name: 'Blog Posts', icon: <Newspaper size={20} />, href: '/admin/list-blog' },
     { name: 'Analytics', icon: <BarChart size={20} />, href: '/admin/analytics' },
     { name: 'Payments', icon: <WalletCards size={20} />, href: '/admin/payments' },
